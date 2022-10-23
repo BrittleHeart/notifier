@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[alert-status="unread"] {
+  @apply bg-neutral-light-grayish-blue-1;
+}
