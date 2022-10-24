@@ -4,19 +4,19 @@ import { notifications } from '@/notifications'
 import { assertIsDefined } from '@/utils/asserts'
 
 /**
- * Store has been created with one idea in mind
- * for now, I don't want to expand this application as much
- * so, to keep it simple, I'm using a single store with no modules within it
+ * Store has been created with one idea in mind.
+ * For now, I don't want to expand this application as much (i.e handling users, creating messages etc.)
+ * so, to keep it simple, I'm using a single store with no modules within it.
  *
- * In the future, there is a possibility to expand this application
- * then I'll add modules with proper name.
+ * In the future, there is a possibility of expanding this application,
+ * If it happens, I will add all required modules.
  * 
- * What could also suprise you, there's not point, to write mutation
- * for handling possible updates for notification as it own
+ * What could also suprise you, there's no point, to write mutations
+ * for handling possible updates for notification model
  * 
- * Why? We don't want to allow users, to possibly change message, type or 
+ * Why? We don't want to allow users, to possibly change notification's message, type or 
  * any other property of the notification. We want them, to be able to
- * change isRead property, nothing more
+ * change it's isRead property, nothing more
  */
 export const store = createStore<{
   notifications: NotificationInterface[]
