@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import { NotificationInterface } from '@/interfaces/NotificationInterface'
 import { notifications } from '@/notifications'
-import NotFoundError from '@/errors/NotFoundError'
+import { assertIsDefined } from '@/utils/asserts'
 
 /**
  * Store has been created with one idea in mind
@@ -10,6 +10,13 @@ import NotFoundError from '@/errors/NotFoundError'
  *
  * In the future, there is a possibility to expand this application
  * then I'll add modules with proper name.
+ * 
+ * What could also suprise you, there's not point, to write mutation
+ * for handling possible updates for notification as it own
+ * 
+ * Why? We don't want to allow users, to possibly change message, type or 
+ * any other property of the notification. We want them, to be able to
+ * change isRead property, nothing more
  */
 export const store = createStore<{
   notifications: NotificationInterface[]
@@ -81,8 +88,7 @@ export const store = createStore<{
         (notification) => notification.id === id
       )
 
-      if (undefined === notification)
-        throw new NotFoundError(`Notification with id ${id} not found`)
+      assertIsDefined(notification)
 
       notification.isRead = !notification.isRead
     },
@@ -91,17 +97,22 @@ export const store = createStore<{
      * Removes notification from list
      *
      * @param state notifications
-     * @param { number } id
+     * @param { id: number, index: number } params
      * @return void
      */
-    REMOVE_NOTIFICATION({ notifications }, id: number) {
+    REMOVE_NOTIFICATION(
+      { notifications },
+      params: { id: number; index: number }
+    ) {
+      const { id, index } = params
+
       let notification = notifications.find(
         (notification) => notification.id === id
       )
-      if (undefined === notification)
-        throw new NotFoundError(`Notification with id ${id} not found`)
 
-      notifications.splice(notification.id, 1)
+      assertIsDefined(notification)
+
+      notifications.splice(index, 1)
     },
   },
   actions: {
@@ -122,7 +133,7 @@ export const store = createStore<{
      * @return NotificationInterface[]
      */
     async markAsRead({ commit }, id: number) {
-      commit('MARK_AS_READ', id)
+      commit('TOGGLE_IS_READ', id)
     },
 
     /**
@@ -140,11 +151,11 @@ export const store = createStore<{
      * Removes notification from list
      *
      * @param state notifications
-     * @param { number } id
+     * @param { id: number, index: number } params
      * @return void
      */
-    async removeNotification({ commit }, id: number) {
-      commit('REMOVE_NOTIFICATION', id)
+    async removeNotification({ commit }, params: { id: number, index: number }) {
+      commit('REMOVE_NOTIFICATION', params)
     },
   },
 })

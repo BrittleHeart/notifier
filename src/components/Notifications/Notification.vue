@@ -19,7 +19,7 @@ let { actor, message }: NotificationInterface = ref(props.notification).value
     <!-- actor avatar -->
     <div class="notifier-notifications__actor-avatar">
       <img
-        :src="actor.avatar"
+        :src="`/${actor.avatar}`"
         alt="actor avar"
         class="notifier-notifications__avatar-img"
       />
