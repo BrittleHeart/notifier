@@ -12,9 +12,9 @@ let notificationsCount = store.getters['getCountUnread']
 </script>
 
 <template>
-  <main class="notifier-wrapper">
+  <main class="notifier-wrapper mobile:w-full desktop:w-6/12 desktop:mx-auto desktop:mt-10 bg-neutral-white rounded-lg p-5">
     <!-- top side -->
-    <section class="notifier-top-side">
+    <section class="notifier-top-side flex justify-between items-center">
       <div class="notifier-top-side__title">
         <h1>
           Notifications
@@ -39,14 +39,6 @@ let notificationsCount = store.getters['getCountUnread']
       </div>
     </Notifications>
   </main>
-  Notifications 3 Mark all as read Mark Webber reacted to your recent post My
-  first tournament today! 1m ago Angela Gray followed you 5m ago Jacob Thompson
-  has joined your group Chess Club 1 day ago Rizky Hasanuddin sent you a private
-  message 5 days ago Hello, thanks for setting up the Chess Club. I've been a
-  member for a few weeks now and I'm already having lots of fun and improving my
-  game. Kimberly Smith commented on your picture 1 week ago Nathan Peterson
-  reacted to your recent post 5 end-game strategies to increase your win rate 2
-  weeks ago Anna Kim left the group Chess Club 2 weeks ago
 </template>
 
 <style scoped></style>

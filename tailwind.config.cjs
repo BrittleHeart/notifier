@@ -16,7 +16,7 @@
 - Very dark blue: hsl(224, 21%, 14%)
  */
 module.exports = {
-  content: ['./src/**/*.html', './src/**/*.vue', './src/**/*.jsx'],
+  content: ['./**/*.html', './src/**/*.vue', './src/**/*.jsx'],
   theme: {
     extend: {
       screens: {
